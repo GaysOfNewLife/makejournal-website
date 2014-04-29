@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+                    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+	<!-- use-expressions表示是否可以使用表达式，设为true，可是使用spring security内置的表达式，其值有permitAll(允许所有),hasRole(),isAuthenticated(),hasAnyRole(),denyAll等 -->
+	<!-- disable-url-rewriting 表示是否禁用重写url的功能，设置为true，在url中便不会加入 xxx?jsessionid=xxx部分 -->
+	<http access-denied-page="/403.jsp" use-expressions="true" disable-url-rewriting="true">
+		<!-- default-target-url 指定了从登录页面登录后进行跳转的页面 -->
+		<!-- always-use-default-target true表示登录成功后强制跳转 -->
+		<!-- authentication-failure-url 表示验证失败后进入的页面 -->
+		<!-- login-processing-url 设置验证登录验证地址，如果不设置，默认是j_spring_security_check -->
+		<!-- username-parameter,password-parameter 设置登录用户名和密码的请求name，默认：j_username,j_password -->
+		<form-login login-page="/login.jsp" login-processing-url="/login" default-target-url="/index.html" authentication-failure-url="/login.jsp?error=true" />
+		<logout logout-success-url="/login.jsp" />
+		<intercept-url pattern="/login.jsp" access="permitAll" />
+		<intercept-url pattern="/bootstrap/**" access="permitAll" />
+		<intercept-url pattern="/javascript/**" access="permitAll" />
+		<intercept-url pattern="/index.html" access="permitAll" />
+		<intercept-url pattern="/403.jsp" access="permitAll" />
+		<intercept-url pattern="/favicon.ico" access="permitAll" />
+		<intercept-url pattern="/test" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_GUEST')" />
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<!-- <intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+		<intercept-url pattern="/messageList.htm" access="hasRole('ROLE_ADMIN')" />
+		<!-- <intercept-url pattern="/index.jsp" access="ROLE_USER" /> -->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
+		<!-- access="ROLE_ADMIN,ROLE_USER" -->
+		<anonymous username="guest" granted-authority="ROLE_GUEST" />
+
+
+		<!-- <logout logout-url="/logout" logout-success-url="/index.html" /> -->
+		<!-- error-if-maximum-exceeded 后登陆的账号会挤掉第一次登陆的账号 -->
+		<!-- session-fixation-protection 防止伪造sessionid攻击,用户登录成功后会销毁用户当前的session。 -->
+		<!-- <session-management invalid-session-url="/user/timedout" session-fixation-protection="none"> -->
+		<!-- concurrency-control是控制一个帐号最多允许登录多少次 -->
+		<!-- <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" /> -->
+		<!-- </session-management> -->
+	</http>
+
+	<beans:bean id="userDetailsService" class="cn.com.newlife.makejournal.service.impl.MyUserDetailServiceImpl">
+		<beans:property name="userService" ref="userService" />
+	</beans:bean>
+
+	<authentication-manager alias="authManager">
+		<!-- <authentication-provider> <jdbc-user-service data-source-ref="dataSource" /> </authentication-provider> -->
+		<authentication-provider user-service-ref="userDetailsService" />
+		<!-- <authentication-provider user-service-ref="userServiceDetail"> -->
+		<!-- <password-encoder hash="md5"> -->
+		<!-- 盐值 [添加这个属性后，加密密码明文为:"密码明文{盐值}"] -->
+		<!-- <salt-source user-property="username" /> -->
+		<!-- </password-encoder> -->
+		<!-- </authentication-provider> -->
+	</authentication-manager>
+
+</beans:beans> 

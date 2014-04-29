@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-3.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/mvc  
+     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+
+	<!-- <context:component-scan base-package="com.wdh.sm"> -->
+
+	<!-- <context:exclude-filter type="regex" expression=".*Controller$" /> -->
+
+	<!-- </context:component-scan> -->
+	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
+	<!-- Proxool直接配置 -->
+	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="alias" value="proxoolDataSource" />
+		<property name="driver" value="${jdbc.driverClassName}" />
+		<property name="driverUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 最少保持的空闲连接数（默认2个） -->
+		<property name="prototypeCount" value="2" />
+		<!-- 最大连接数（默认5个） -->
+		<property name="maximumConnectionCount" value="5" />
+		<!-- 最小连接数（默认2个） -->
+		<property name="minimumConnectionCount" value="2" />
+		<!-- 最大活动时间（超过此时间线程将被kill，默认5分钟） -->
+		<property name="maximumActiveTime" value="300000" />
+		<!-- 同时最大连接数 -->
+		<property name="simultaneousBuildThrottle" value="3" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- -->
+		<property name="packagesToScan">
+			<list>
+				<value>cn.com.newlife.makejournal.entity</value>
+			</list>
+		</property>
+		<!-- <property name="annotatedClasses"> <list> <value></value> </list> 
+			</property> -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="simpleHibernateDAO" class="cn.com.newlife.makejournal.dao.impl.SimpleHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="messageBoardService" class="cn.com.newlife.makejournal.service.impl.MessageBoardService"/>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="create*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="select*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<!-- 任意公共方法的执行：execution(public * *(..)) -->
+		<!-- 任何一个以“set”开始的方法的执行：execution(* set*(..)) -->
+		<!-- AccountService 接口的任意方法的执行：execution(* com.xyz.service.AccountService.*(..)) -->
+		<!-- 定义在service包里的任意方法的执行：execution(* com.xyz.service.*.*(..)) -->
+		<!-- 定义在service包或者子包里的任意方法的执行：execution(* com.xyz.service..*.*(..)) -->
+		<aop:advisor pointcut="execution(public * cn.com.newlife.makejournal..*.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+</beans>
