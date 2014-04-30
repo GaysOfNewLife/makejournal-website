@@ -1,45 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>makeJournal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+body {
+	padding-top: 50px;
+}
+
+.welcome {
+	padding: 40px 15px;
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<h2>Welcome! <security:authentication property="name" /></h2>  
-<security:authentication property="authorities" var="authorities" />  
-<ul>  
-    <c:forEach items="${authorities}" var="authority">  
-        <li>${authority.authority}</li>  
-    </c:forEach>  
-</ul>  
-<hr />  
-<c:forEach items="${messages}" var="message">  
-    <table>  
-        <security:authorize ifAllGranted="ROLE_ADMIN,ROLE_USER">  
-            <tr>  
-                <td>Author</td>  
-                <td>${message.author}</td>  
-            </tr>  
-        </security:authorize>  
-        <tr>  
-            <td>Title</td>  
-            <td>${message.title}</td>  
-        </tr>  
-        <tr>  
-            <td>Body</td>  
-            <td>${message.body}</td>  
-        </tr>  
-        <tr>  
-            <td colspan="2"><a  
-                href="messageDelete.htm?messageId=${message.id}">Delete</a></td>  
-        </tr>  
-    </table>  
-    <hr />  
-</c:forEach>  
-<a href="messagePost.htm">Post</a>  
-<a href="<c:url value="/j_spring_security_logout" />">Logout</a>  
+	<jsp:include page="pages/template/header.jsp"/>
+
+	<div class="container">
+
+		<div class="welcome">
+			<h1>Welcome to makeJournal!</h1>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="javascript/jquery-1.11.0.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
