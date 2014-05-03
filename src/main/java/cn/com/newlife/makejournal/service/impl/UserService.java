@@ -16,13 +16,21 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	public User getUserById(String id) {
+		return (User) simpleHibernateDAO.get(User.class, id);
+	}
+
+	@Override
 	public User getUserByUsername(String username) {
-		return (User) simpleHibernateDAO.getUniqueResultByHQL("from User where username = ?", username);
+		return (User) simpleHibernateDAO.getUniqueResultByHQL(
+				"from User where username = ?", username);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Role> getRolesByUsername(String username) {
-		return simpleHibernateDAO.findByHQL("select ur.role from UserRole ur where ur.user.username = ?", username);
+		return simpleHibernateDAO.findByHQL(
+				"select ur.role from UserRole ur where ur.user.username = ?",
+				username);
 	}
 }

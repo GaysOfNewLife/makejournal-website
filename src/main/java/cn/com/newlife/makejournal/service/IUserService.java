@@ -8,6 +8,14 @@ import cn.com.newlife.makejournal.entity.User;
 public interface IUserService {
 
 	/**
+	 * 通过id获取用户
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public User getUserById(String id);
+
+	/**
 	 * 通过用户名获取用户
 	 * 
 	 * @param username

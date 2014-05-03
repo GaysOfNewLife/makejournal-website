@@ -23,10 +23,10 @@ public class TestController {
 	private ModelAndView toTest() {
 		System.out.println("I am in TestController-->test");
 		simpleHibernateDAO.deleteAll(simpleHibernateDAO.findByHQL("from User"));
-		System.out.println(simpleHibernateDAO.findByHQL("from User"));
-		simpleHibernateDAO.saveOrUpdate(new User(IdUtil.getUUID(), "test", "test"));
-		System.out.println(simpleHibernateDAO.findByHQL("from User"));
-		System.out.println(userService.getUserByUsername("test"));
+		String id = IdUtil.getUUID();
+		User user = new User(id, "test", "test");
+		simpleHibernateDAO.saveOrUpdate(user);
+		user.setUsername("test1");
 		return new ModelAndView("test");
 	}
 

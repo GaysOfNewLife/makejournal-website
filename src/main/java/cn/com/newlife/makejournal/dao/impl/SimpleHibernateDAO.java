@@ -25,7 +25,8 @@ public class SimpleHibernateDAO implements ISimpleHibernateDAO {
 
 	@Override
 	public void delete(Object object) {
-		getSession().delete(object);
+		if (object != null)
+			getSession().delete(object);
 	}
 
 	@Override

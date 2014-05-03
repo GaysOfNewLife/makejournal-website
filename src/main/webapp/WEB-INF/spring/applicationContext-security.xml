@@ -12,6 +12,7 @@
 		<!-- username-parameter,password-parameter 设置登录用户名和密码的请求name，默认：j_username,j_password -->
 		<form-login login-page="/login.jsp" login-processing-url="/login" default-target-url="/index.html" authentication-failure-url="/login.jsp?error=true" />
 		<logout logout-success-url="/login.jsp" />
+		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/login.jsp" access="permitAll" />
 		<intercept-url pattern="/bootstrap/**" access="permitAll" />
 		<intercept-url pattern="/javascript/**" access="permitAll" />
@@ -23,7 +24,7 @@
 		<!-- <intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
 		<intercept-url pattern="/messageList.htm" access="hasRole('ROLE_ADMIN')" />
 		<!-- <intercept-url pattern="/index.jsp" access="ROLE_USER" /> -->
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> -->
 
 		<!-- access="ROLE_ADMIN,ROLE_USER" -->
 		<anonymous username="guest" granted-authority="ROLE_GUEST" />
