@@ -16,13 +16,13 @@
 		<intercept-url pattern="/login.jsp" access="permitAll" />
 		<intercept-url pattern="/bootstrap/**" access="permitAll" />
 		<intercept-url pattern="/javascript/**" access="permitAll" />
+		<intercept-url pattern="/images/**" access="permitAll" />
 		<intercept-url pattern="/index.jsp" access="permitAll" />
 		<intercept-url pattern="/403.jsp" access="permitAll" />
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/test" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_GUEST')" />
 		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<!-- <intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
-		<intercept-url pattern="/messageList.htm" access="hasRole('ROLE_ADMIN')" />
 		<!-- <intercept-url pattern="/index.jsp" access="ROLE_USER" /> -->
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> -->
 

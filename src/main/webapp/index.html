@@ -24,41 +24,51 @@ body {
 </head>
 <body>
 	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="#" class="navbar-brand">MakeJournal</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <form role="form" class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
-            </div>
-            <button class="btn btn-success" type="submit">Sign in</button>
-            <a class="btn btn-primary" href="reg.jsp">Sign up</a>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+		<div class="container">
+			<div class="navbar-header">
+				<button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">MakeJournal</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<form role="form" class="navbar-form navbar-right">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="Password">
+					</div>
+					<button class="btn btn-success" type="submit">Sign in</button>
+					<a class="btn btn-primary" href="reg.jsp">Sign up</a>
+				</form>
+			</div>
+			<!--/.navbar-collapse -->
+		</div>
+	</div>
 
 	<div class="container">
-
 		<div class="welcome">
 			<h1>Welcome to makeJournal!</h1>
 		</div>
-		<div>
-			<div><a href="pages/choosePlatform.jsp">英文入口</a></div>
-			<div><a href="pages/choosePlatform.jsp">中文入口</a></div>
+		<div class="row">
+			<div class="col-xs-6 col-md-1">
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<a href="pages/choosePlatform.jsp" class="thumbnail"> <img alt="" src="images/platform_e.jpg">
+				</a>
+				<h4>英文入口</h4>
+			</div>
+			<div class="col-xs-6 col-md-2">
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<a href="pages/choosePlatform.jsp" class="thumbnail"> <img alt="" src="images/platform_c.jpg">
+				</a>
+				<h4>中文入口</h4>
+			</div>
+			<div class="col-xs-6 col-md-1">
+			</div>
 		</div>
-
 	</div>
 	<!-- /.container -->
 

@@ -1,5 +1,7 @@
 package cn.com.newlife.makejournal.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import cn.com.newlife.makejournal.utils.IdUtil;
 
 @Controller
 public class TestController {
+	private static Log log = LogFactory.getLog(TestController.class);
 
 	@Autowired
 	private ISimpleHibernateDAO simpleHibernateDAO;
@@ -21,6 +24,11 @@ public class TestController {
 
 	@RequestMapping("/test")
 	private ModelAndView toTest() {
+		log.debug("debug:toTest");
+		log.info("info:toTest");
+		log.warn("warn:toTest");
+		log.error("error:toTest");
+		log.fatal("fatal:toTest");
 		System.out.println("I am in TestController-->test");
 		simpleHibernateDAO.deleteAll(simpleHibernateDAO.findByHQL("from User"));
 		String id = IdUtil.getUUID();

@@ -19,9 +19,9 @@
 	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*" /> <bean class="com.wdh.sm.filter.LoginFilter" /> </mvc:interceptor> </mvc:interceptors> -->
 	<!-- 静态资源配置，不被拦截 -->
 	<mvc:default-servlet-handler />
-	<mvc:resources mapping="/javascript/**" location="/static_resources/javascript/" />
+	<!-- <mvc:resources mapping="/javascript/**" location="/static_resources/javascript/" />
 	<mvc:resources mapping="/styles/**" location="/static_resources/css/" />
-	<mvc:resources mapping="/images/**" location="/static_resources/images/" />
+	<mvc:resources mapping="/images/**" location="/static_resources/images/" /> -->
 
 	<!-- 试图配置 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
