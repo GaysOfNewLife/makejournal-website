@@ -27,21 +27,17 @@ body {
 	<jsp:include page="pages/template/header.jsp" />
 	<div class="middle">
 		<div class="container">
-
-			<div class="welcome">
-				<h1>Welcome to makeJournal!</h1>
-			</div>
 			<div class="row">
 				<div class="col-xs-3 col-md-2"></div>
 				<div class="col-xs-6 col-md-4">
 					<a href="pages/choosePlatform.jsp" class="thumbnail"> <img alt="" src="images/platform_e.jpg">
 					</a>
-					<h4>Facebook/instagram</h4>
+					<h4>Facebook</h4>
 				</div>
 				<div class="col-xs-6 col-md-4">
 					<a href="pages/choosePlatform.jsp" class="thumbnail"> <img alt="" src="images/platform_c.jpg">
 					</a>
-					<h4>新浪/人人/腾讯</h4>
+					<h4>Instagram</h4>
 				</div>
 				<div class="col-xs-3 col-md-2"></div>
 			</div>

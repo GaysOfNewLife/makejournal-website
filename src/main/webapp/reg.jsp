@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login</title>
+<title>Reg</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -58,7 +58,13 @@ border-top-right-radius: 0;
 <body>
 	<jsp:include page="pages/template/header.jsp"/>
 	<div class="container">
-		注册
+		<form class="form-signin" role="form" action="/reg" method="post">
+			<h2 class="form-signin-heading">Register your account</h2>
+			<input class="form-control" placeholder="Pick a username" required="required" autofocus="autofocus" type="text">
+			<input class="form-control" placeholder="Your Email" required="required" type="text">
+			<input class="form-control" placeholder="Create a password" required="required" type="password">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+		</form>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="javascript/jquery-1.11.0.min.js"></script>

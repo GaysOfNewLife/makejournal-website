@@ -8,6 +8,7 @@
 			<a href="#" class="navbar-brand">MakeJournal</a>
 		</div>
 		<div class="navbar-collapse collapse">
+		${sessionScope.user }
 			<form role="form" class="navbar-form navbar-right">
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Email">
@@ -16,6 +17,7 @@
 					<input type="password" class="form-control" placeholder="Password">
 				</div>
 				<button class="btn btn-success" type="submit">Sign in</button>
+				<a class="btn btn-primary" href="reg.jsp">Sign up</a>
 			</form>
 		</div>
 	</div>
